@@ -19,7 +19,7 @@
     }
   ],
   "paths": {
-    "/plants": {
+    "/walmart/single/product-page-data": {
       "get": {
         "description": "Takes a product code, matches it to a product page, and returns all Walmart product page data for that product",
         "parameters": [
@@ -149,7 +149,9 @@
     "schemas": {
       "Plant": {
         "required": [
-         
+          "upc",
+          "ean",
+          "walmart_product_code"
         ],
         "type": "object",
         "properties": {
