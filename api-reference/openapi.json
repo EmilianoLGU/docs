@@ -1,8 +1,8 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "title": "OpenAPI Plant Store",
-    "description": "A sample API that uses a plant store as an example to demonstrate features in the OpenAPI specification",
+    "title": "Rivin.ai Walmart API",
+    "description": "A sample API that uses a Walmart product page as an example to demonstrate features in the OpenAPI specification",
     "license": {
       "name": "MIT"
     },
@@ -10,7 +10,7 @@
   },
   "servers": [
     {
-      "url": "http://sandbox.mintlify.com"
+      "url": "https://rivin.ai/api/v1"
     }
   ],
   "security": [
@@ -19,14 +19,32 @@
     }
   ],
   "paths": {
-    "/plants": {
+    "/walmart/single/product-page-data": {
       "get": {
-        "description": "Returns all plants from the system that the user has access to",
+        "description": "Returns data from a Walmart product page",
         "parameters": [
           {
-            "name": "limit",
+            "name": "upc",
             "in": "query",
-            "description": "The maximum number of results to return",
+            "description": "A UPC number for a product",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "ean",
+            "in": "query",
+            "description": "A EAN number for a product",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "walmart_product_code",
+            "in": "query",
+            "description": "A Walmart US Item ID or product code",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -35,7 +53,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Plant response",
+            "description": "Walmart product page data",
             "content": {
               "application/json": {
                 "schema": {
@@ -132,18 +150,83 @@
   },
   "components": {
     "schemas": {
-      "Plant": {
+      "ProductPageData": {
         "required": [
           "name"
         ],
         "type": "object",
         "properties": {
-          "name": {
-            "description": "The name of the plant",
+          "walmart_product_code": {
+            "description": "The Walmart US Item ID or product code of the product",
             "type": "string"
           },
-          "tag": {
-            "description": "Tag to specify the type",
+          "upc": {
+            "description": "The UPC number of the product",
+            "type": "string"
+          },
+          "ean": {
+            "description": "The EAN number of the product",
+            "type": "string"
+          },
+          "product_brand": {
+            "description": "The brand of the product",
+            "type": "string"
+          },
+          "product_title": {
+            "description": "The title of the product",
+            "type": "string"
+          },
+          "product_badges": {
+            "description": "The badges of the product",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "product_variants": {
+            "description": "The variants of the product",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "product_buybox_price": {
+            "description": "The buybox price of the product",
+            "type": "integer",
+            "format": "int32"
+          },
+          "product_current_buybox_seller_name": {
+            "description": "The current buybox seller name of the product",
+            "type": "string"
+          },
+          "product_buybox_seller_return_policy": {
+            "description": "The buybox seller return policy of the product",
+            "type": "string"
+          },
+          "product_rating": {
+            "description": "The rating of the product",
+            "type": "string"
+          },
+          "product_rating_count": {
+            "description": "The rating count of the product",
+            "type": "integer",
+            "format": "int32"
+          },
+          "product_reviews_count": {
+            "description": "The reviews count of the product",
+            "type": "integer",
+            "format": "int32"
+          },
+          "product_specifications": {
+            "description": "The specifications of the product",
+            "type": "string"
+          },
+          "product_warranty_information": {
+            "description": "The warranty information of the product",
+            "type": "string"
+          },
+          "product_warnings": {
+            "description": "The warnings of the product",
             "type": "string"
           }
         }
